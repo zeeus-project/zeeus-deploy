@@ -11,7 +11,7 @@ services:
       POSTGRES_DB: zeeus
     volumes:
       - zeeus-db-data:/var/lib/postgresql/data
-      - ./zeeus-backend/src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ../zeeus-backend/src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "5432:5432"
     healthcheck:
@@ -23,7 +23,7 @@ services:
   # ── Backend (Node.js/Express) ────────────────────────────────────────────────
   backend:
     build:
-      context: ./zeeus-backend
+      context: ../zeeus-backend
       dockerfile: Dockerfile
     container_name: zeeus-backend
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
   # ── Frontend (Next.js) ───────────────────────────────────────────────────────
   frontend:
     build:
-      context: ./zeeus-frontend
+      context: ../zeeus-frontend
       dockerfile: Dockerfile
     container_name: zeeus-frontend
     restart: unless-stopped
